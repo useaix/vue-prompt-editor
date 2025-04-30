@@ -47,5 +47,10 @@
     "scss",
     "pcss",
     "postcss"
-  ]
+  ],
+  "cSpell.words": [
+    "catppuccin",
+    "shiki"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
