@@ -4,7 +4,7 @@ import { createHighlighterCoreSync, createJavaScriptRegexEngine } from 'shiki'
 import markdown from 'shiki/langs/markdown.mjs'
 import catppuccinLatte from 'shiki/themes/catppuccin-latte.mjs'
 import catppuccinMocha from 'shiki/themes/catppuccin-mocha.mjs'
-import { ref, watch } from 'vue'
+import { onBeforeUnmount, ref, watch } from 'vue'
 
 defineOptions({
   name: 'PromptEditor',
@@ -39,6 +39,10 @@ watch(model, (str) => {
   })
 }, {
   immediate: true,
+})
+
+onBeforeUnmount(() => {
+  highlighter.dispose()
 })
 </script>
 
