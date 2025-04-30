@@ -19,7 +19,20 @@ const props = withDefaults(defineProps<{
 
 const model = defineModel({
   type: String,
+  default: '',
 })
+
+// for CJK
+const modelStored = ref('')
+function onCompositionstart() {
+  modelStored.value = model.value
+}
+function onCompositionupdate(e: CompositionEvent) {
+  model.value = modelStored.value + e.data
+}
+function onCompositionend() {
+  modelStored.value = ''
+}
 
 const themesResolved = Array.isArray(props.themes) ? props.themes : [props.themes]
 
@@ -51,7 +64,13 @@ onBeforeUnmount(() => {
 <template>
   <div class="rounded-lg overflow-hidden relative min-w-full min-h-full font-mono text-base">
     <div class="[&>.shiki]:p-4 [&>.shiki]:min-h-16" v-html="output" />
-    <textarea v-model="model" class="absolute focus-within:outline-none inset-0 top-0 left-0 p-4 text-transparent bg-transparent caret-black resize-none overflow-hidden z-10" />
+    <textarea
+      v-model="model"
+      class="absolute focus-within:outline-none inset-0 top-0 left-0 p-4 text-transparent bg-transparent caret-black resize-none overflow-hidden z-10"
+      @compositionstart="onCompositionstart"
+      @compositionupdate="onCompositionupdate"
+      @compositionend="onCompositionend"
+    />
   </div>
 </template>
 
