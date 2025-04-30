@@ -49,9 +49,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="rounded-lg overflow-hidden relative min-w-full min-h-full">
+  <div class="rounded-lg overflow-hidden relative min-w-full min-h-full font-mono text-base">
     <div class="[&>.shiki]:p-4 [&>.shiki]:min-h-16" v-html="output" />
-    <textarea v-model="model" class="absolute font-mono focus-within:outline-none inset-0 top-0 left-0 p-4 text-transparent bg-transparent caret-black resize-none overflow-hidden z-10" />
+    <textarea v-model="model" class="absolute focus-within:outline-none inset-0 top-0 left-0 p-4 text-transparent bg-transparent caret-black resize-none overflow-hidden z-10" />
   </div>
 </template>
 
