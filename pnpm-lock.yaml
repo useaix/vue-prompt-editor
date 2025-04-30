@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@shikijs/colorized-brackets':
+        specifier: ^3.3.0
+        version: 3.3.0
       shiki:
         specifier: ^3.3.0
         version: 3.3.0
@@ -585,6 +588,9 @@ packages:
     resolution: {integrity: sha512-ECyOuDeH3C1I8jH2MK1RtBJW+YPMvSfT0a5NN0nHfQYnDSJ6tUiZH3gzwVP5/Kfh/+Tt7tpWVF9LXNTnhTJ3kA==}
     cpu: [x64]
     os: [win32]
+
+  '@shikijs/colorized-brackets@3.3.0':
+    resolution: {integrity: sha512-/Rw0tnuoSPs75qDTvAQrYG34+qlV/hewIwXD0BGmsRcqVT6Y0DcvUGfQEdunowytcKnn/YabFqwj3wgVig4RmA==}
 
   '@shikijs/core@3.3.0':
     resolution: {integrity: sha512-CovkFL2WVaHk6PCrwv6ctlmD4SS1qtIfN8yEyDXDYWh4ONvomdM9MaFw20qHuqJOcb8/xrkqoWQRJ//X10phOQ==}
@@ -3207,6 +3213,10 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.40.1':
     optional: true
+
+  '@shikijs/colorized-brackets@3.3.0':
+    dependencies:
+      shiki: 3.3.0
 
   '@shikijs/core@3.3.0':
     dependencies:

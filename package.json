@@ -38,6 +38,7 @@
     "vue": "^3"
   },
   "dependencies": {
+    "@shikijs/colorized-brackets": "^3.3.0",
     "shiki": "^3.3.0"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { MaybeArray, ThemeRegistrationAny } from 'shiki'
+import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
 import { createHighlighterCoreSync, createJavaScriptRegexEngine } from 'shiki'
 import markdown from 'shiki/langs/markdown.mjs'
 import catppuccinLatte from 'shiki/themes/catppuccin-latte.mjs'
@@ -36,6 +37,7 @@ watch(model, (str) => {
       dark: themesResolved[themesResolved.length > 1 ? 1 : 0].name!,
     },
     lang: 'markdown',
+    transformers: [transformerColorizedBrackets()],
   })
 }, {
   immediate: true,
