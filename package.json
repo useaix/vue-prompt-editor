@@ -6,6 +6,10 @@
   "description": "A vue component for edit prompt in markdown language",
   "author": "litingyes <luz.liting@gmail.com> (https://litingyes.top/)",
   "license": "MIT",
+  "homepage": "https://vue-prompt-editor.netlify.app/",
+  "bugs": {
+    "url": "https://github.com/useaix/vue-prompt-editor/issues"
+  },
   "keywords": [
     "useaix",
     "vue",
