@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import type { MaybeArray, ThemeRegistrationAny } from 'shiki'
-import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
-import { createHighlighterCoreSync, createJavaScriptRegexEngine } from 'shiki'
-import markdown from 'shiki/langs/markdown.mjs'
-import catppuccinLatte from 'shiki/themes/catppuccin-latte.mjs'
-import catppuccinMocha from 'shiki/themes/catppuccin-mocha.mjs'
-import { onBeforeUnmount, ref, watch } from 'vue'
-import { transformPlaceholder } from './shikiTransforms'
+import { markdown } from '@codemirror/lang-markdown'
+import { EditorView, placeholder } from '@codemirror/view'
+import { onBeforeUnmount, onMounted, shallowRef, useTemplateRef } from 'vue'
+import { basicSetup } from './extensions'
 
 defineOptions({
   name: 'PromptEditor',
@@ -14,10 +10,8 @@ defineOptions({
 
 const props = withDefaults(defineProps<{
   placeholder?: string
-  themes?: MaybeArray<ThemeRegistrationAny>
 }>(), {
   placeholder: 'AI prompt',
-  themes: () => [catppuccinLatte, catppuccinMocha],
 })
 
 const model = defineModel({
@@ -25,73 +19,31 @@ const model = defineModel({
   default: '',
 })
 
-// for CJK
-const modelStored = ref('')
-function onCompositionstart() {
-  modelStored.value = model.value
-}
-function onCompositionupdate(e: CompositionEvent) {
-  model.value = modelStored.value + e.data
-}
-function onCompositionend() {
-  modelStored.value = ''
-}
-
-const themesResolved = Array.isArray(props.themes) ? props.themes : [props.themes]
-
-const highlighter = createHighlighterCoreSync({
-  themes: themesResolved,
-  langs: [markdown],
-  engine: createJavaScriptRegexEngine(),
-})
-const output = ref('')
-
-watch(model, (str) => {
-  output.value = highlighter.codeToHtml(str ?? '', {
-    themes: {
-      light: themesResolved[0].name!,
-      dark: themesResolved[themesResolved.length > 1 ? 1 : 0].name!,
-    },
-    lang: 'markdown',
-    transformers: [
-      transformerColorizedBrackets(),
-      transformPlaceholder(),
+const containerRef = useTemplateRef('containerRef')
+const editor = shallowRef<EditorView>()
+onMounted(() => {
+  editor.value = new EditorView({
+    doc: model.value,
+    parent: containerRef.value!,
+    extensions: [
+      basicSetup,
+      placeholder(props.placeholder),
+      markdown(),
+      EditorView.updateListener.of(({ state, transactions }) => {
+        if (transactions.some(tr => tr.docChanged)) {
+          model.value = state.doc.toString()
+        }
+      }),
     ],
   })
-}, {
-  immediate: true,
 })
-
 onBeforeUnmount(() => {
-  highlighter.dispose()
+  editor.value?.destroy()
 })
 </script>
 
 <template>
-  <div class="rounded-lg overflow-hidden relative min-w-full min-h-full font-mono text-base">
-    <div class="[&>.shiki]:p-4 [&>.shiki]:min-h-16" v-html="output" />
-    <textarea
-      v-model="model"
-      :placeholder="placeholder"
-      class="absolute focus-within:outline-none inset-0 top-0 left-0 p-4 text-transparent bg-transparent caret-black resize-none overflow-hidden z-10 placeholder:text-gray-500/40"
-      autocapitalize="off"
-      autocomplete="off"
-      autocorrect="off"
-      spellcheck="false"
-      @compositionstart="onCompositionstart"
-      @compositionupdate="onCompositionupdate"
-      @compositionend="onCompositionend"
-    />
+  <div class="rounded-lg overflow-hidden min-w-full min-h-full font-mono text-base">
+    <div ref="containerRef" />
   </div>
 </template>
-
-<style>
-html.dark .shiki,
-html.dark .shiki span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
-  font-style: var(--shiki-dark-font-style) !important;
-  font-weight: var(--shiki-dark-font-weight) !important;
-  text-decoration: var(--shiki-dark-text-decoration) !important;
-}
-</style>

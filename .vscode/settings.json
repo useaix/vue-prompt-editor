@@ -49,9 +49,8 @@
     "postcss"
   ],
   "cSpell.words": [
-    "catppuccin",
     "changelogithub",
-    "shiki"
+    "keymap"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }

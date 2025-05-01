@@ -44,8 +44,11 @@
     "vue": "^3"
   },
   "dependencies": {
-    "@shikijs/colorized-brackets": "^3.3.0",
-    "shiki": "^3.3.0"
+    "@codemirror/commands": "^6.8.1",
+    "@codemirror/lang-markdown": "^6.3.2",
+    "@codemirror/language": "^6.11.0",
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/view": "^6.36.6"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.12.0",
