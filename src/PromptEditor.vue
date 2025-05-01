@@ -13,8 +13,10 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<{
+  placeholder?: string
   themes?: MaybeArray<ThemeRegistrationAny>
 }>(), {
+  placeholder: 'AI prompt',
   themes: () => [catppuccinLatte, catppuccinMocha],
 })
 
@@ -70,7 +72,8 @@ onBeforeUnmount(() => {
     <div class="[&>.shiki]:p-4 [&>.shiki]:min-h-16" v-html="output" />
     <textarea
       v-model="model"
-      class="absolute focus-within:outline-none inset-0 top-0 left-0 p-4 text-transparent bg-transparent caret-black resize-none overflow-hidden z-10"
+      :placeholder="placeholder"
+      class="absolute focus-within:outline-none inset-0 top-0 left-0 p-4 text-transparent bg-transparent caret-black resize-none overflow-hidden z-10 placeholder:text-gray-500/40"
       autocapitalize="off"
       autocomplete="off"
       autocorrect="off"
