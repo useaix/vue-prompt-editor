@@ -6,6 +6,7 @@ import markdown from 'shiki/langs/markdown.mjs'
 import catppuccinLatte from 'shiki/themes/catppuccin-latte.mjs'
 import catppuccinMocha from 'shiki/themes/catppuccin-mocha.mjs'
 import { onBeforeUnmount, ref, watch } from 'vue'
+import { transformPlaceholder } from './shikiTransforms'
 
 defineOptions({
   name: 'PromptEditor',
@@ -50,7 +51,10 @@ watch(model, (str) => {
       dark: themesResolved[themesResolved.length > 1 ? 1 : 0].name!,
     },
     lang: 'markdown',
-    transformers: [transformerColorizedBrackets()],
+    transformers: [
+      transformerColorizedBrackets(),
+      transformPlaceholder(),
+    ],
   })
 }, {
   immediate: true,
