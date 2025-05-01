@@ -67,6 +67,10 @@ onBeforeUnmount(() => {
     <textarea
       v-model="model"
       class="absolute focus-within:outline-none inset-0 top-0 left-0 p-4 text-transparent bg-transparent caret-black resize-none overflow-hidden z-10"
+      autocapitalize="off"
+      autocomplete="off"
+      autocorrect="off"
+      spellcheck="false"
       @compositionstart="onCompositionstart"
       @compositionupdate="onCompositionupdate"
       @compositionend="onCompositionend"
