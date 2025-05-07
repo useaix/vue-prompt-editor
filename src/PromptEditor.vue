@@ -43,7 +43,17 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="rounded-lg overflow-hidden min-w-full min-h-full font-mono text-base">
-    <div ref="containerRef" />
+  <div class="prompt-editor rounded-lg h-full">
+    <div ref="containerRef" class="font-mono text-base h-full" />
   </div>
 </template>
+
+<style>
+.prompt-editor .cm-editor {
+  height: 100%;
+}
+
+.prompt-editor .cm-editor:focus-within {
+  outline: none;
+}
+</style>

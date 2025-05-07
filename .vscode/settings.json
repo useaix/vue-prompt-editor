@@ -50,7 +50,9 @@
   ],
   "cSpell.words": [
     "changelogithub",
-    "keymap"
+    "keymap",
+    "lezer",
+    "oklch"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }
