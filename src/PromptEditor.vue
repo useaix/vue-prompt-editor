@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { markdown } from '@codemirror/lang-markdown'
 import { EditorView, placeholder } from '@codemirror/view'
 import { onBeforeUnmount, onMounted, shallowRef, useTemplateRef } from 'vue'
 import { basicSetup } from './extensions'
@@ -28,7 +27,6 @@ onMounted(() => {
     extensions: [
       basicSetup,
       placeholder(props.placeholder),
-      markdown(),
       EditorView.updateListener.of(({ state, transactions }) => {
         if (transactions.some(tr => tr.docChanged)) {
           model.value = state.doc.toString()

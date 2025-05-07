@@ -1,7 +1,9 @@
 import type { Extension } from '@codemirror/state'
 import { closeBrackets } from '@codemirror/autocomplete'
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
+import { markdown } from '@codemirror/lang-markdown'
 import { bracketMatching, codeFolding, foldGutter, foldKeymap, HighlightStyle, indentOnInput, syntaxHighlighting } from '@codemirror/language'
+import { languages } from '@codemirror/language-data'
 import { highlightSelectionMatches } from '@codemirror/search'
 import { EditorState } from '@codemirror/state'
 import { crosshairCursor, drawSelection, EditorView, highlightActiveLine, highlightActiveLineGutter, highlightSpecialChars, keymap, scrollPastEnd } from '@codemirror/view'
@@ -65,4 +67,7 @@ export const basicSetup: Extension = (() => [
     { tag: tags.strong, fontWeight: '700', color: 'var(--prompt-editor-strong-color, oklch(14.5% 0 0))' },
     { tag: tags.link, color: 'var(--prompt-editor-link-color, oklch(62.3% 0.214 259.815))' },
   ])),
+  markdown({
+    codeLanguages: languages,
+  }),
 ])()
