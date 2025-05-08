@@ -1,6 +1,6 @@
 import type { Extension } from '@codemirror/state'
 import { closeBrackets } from '@codemirror/autocomplete'
-import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
+import { defaultKeymap, history, historyKeymap, indentLess, indentMore } from '@codemirror/commands'
 import { markdown } from '@codemirror/lang-markdown'
 import { bracketMatching, codeFolding, foldGutter, foldKeymap, HighlightStyle, indentOnInput, syntaxHighlighting } from '@codemirror/language'
 import { languages } from '@codemirror/language-data'
@@ -84,6 +84,11 @@ export const basicSetup: Extension = (() => [
     ...defaultKeymap,
     ...historyKeymap,
     ...foldKeymap,
+    {
+      key: 'Tab',
+      run: indentMore,
+      shift: indentLess,
+    },
   ]),
   crosshairCursor(),
 
