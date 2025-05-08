@@ -100,9 +100,6 @@ export const basicSetup: Extension = (() => [
 
     // heading
     { tag: tags.heading, fontWeight: 'var(--prompt-editor-heading-font-weight, bold)', color: 'var(--prompt-editor-heading-color, oklch(62.3% 0.214 259.815))' },
-    { tag: tags.heading1, fontSize: '1.3em', fontWeight: 'var(--prompt-editor-heading-font-weight, bold)', color: 'var(--prompt-editor-heading-color, oklch(62.3% 0.214 259.815))' },
-    { tag: tags.heading2, fontSize: '1.2em', fontWeight: 'var(--prompt-editor-heading-font-weight, bold)', color: 'var(--prompt-editor-heading-color, oklch(62.3% 0.214 259.815))' },
-    { tag: tags.heading3, fontSize: '1.1em', fontWeight: 'var(--prompt-editor-heading-font-weight, bold)', color: 'var(--prompt-editor-heading-color, oklch(62.3% 0.214 259.815))' },
 
     // variants
     { tag: tags.quote, fontStyle: 'italic', color: 'var(--prompt-editor-quote-color,  oklch(37.1% 0 0))' },
