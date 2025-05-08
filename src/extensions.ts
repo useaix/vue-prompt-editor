@@ -29,6 +29,21 @@ export const basicSetup: Extension = (() => [
     '&.cm-focused': {
       outline: 'none',
     },
+    '.cm-scroller::-webkit-scrollbar': {
+      width: '6px',
+      height: '6px',
+    },
+    '.cm-scroller::-webkit-scrollbar-thumb': {
+      backgroundColor: 'oklch(87.2% 0.01 258.338)',
+      borderRadius: '8px',
+    },
+    '.cm-scroller::-webkit-scrollbar-thumb:hover': {
+      backgroundColor: 'oklch(70.7% 0.022 261.325)',
+      cursor: 'grab',
+    },
+    '.cm-scroller::-webkit-scrollbar-thumb:active': {
+      cursor: 'grabbing',
+    },
 
     // gutters
     '.cm-gutters': {
