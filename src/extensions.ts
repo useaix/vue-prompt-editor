@@ -6,7 +6,7 @@ import { bracketMatching, codeFolding, foldGutter, foldKeymap, HighlightStyle, i
 import { languages } from '@codemirror/language-data'
 import { highlightSelectionMatches } from '@codemirror/search'
 import { EditorState } from '@codemirror/state'
-import { crosshairCursor, drawSelection, EditorView, highlightActiveLine, highlightActiveLineGutter, highlightSpecialChars, keymap, scrollPastEnd } from '@codemirror/view'
+import { crosshairCursor, drawSelection, EditorView, highlightActiveLine, highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers, scrollPastEnd } from '@codemirror/view'
 import { tags } from '@lezer/highlight'
 
 export const basicSetup: Extension = (() => [
@@ -32,14 +32,28 @@ export const basicSetup: Extension = (() => [
 
     // gutters
     '.cm-gutters': {
-      backgroundColor: 'oklch(98.5% 0.002 247.839)',
+      backgroundColor: 'transparent',
       border: 'none',
     },
-    '.cm-fold-gutter': {
+    '.cm-lineNumbers': {
+      backgroundColor: 'oklch(98.5% 0.002 247.839)',
+    },
+    '.cm-lineNumbers .cm-gutterElement': {
+      padding: '0px',
+      textAlign: 'center',
+    },
+    '.cm-foldGutter .cm-activeLineGutter': {
+      backgroundColor: 'oklch(97% 0.014 254.604)',
+    },
+    '.cm-foldGutter .cm-gutterElement': {
       cursor: 'pointer',
     },
-    '.cm-fold-gutter[data-open="false"]': {
+    '.cm-foldGutter svg[data-open="false"]': {
       transform: 'rotateZ(-90deg)',
+    },
+
+    '.cm-activeLine': {
+      backgroundColor: 'oklch(97% 0.014 254.604)',
     },
   }),
 
@@ -53,9 +67,10 @@ export const basicSetup: Extension = (() => [
   highlightSelectionMatches(),
 
   // gutters
+  lineNumbers(),
   foldGutter({
     markerDOM(open) {
-      const svg = `<svg class="cm-fold-gutter" data-open="${open}" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M36 18L24 30L12 18" /></svg>`
+      const svg = `<svg data-open="${open}" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M36 18L24 30L12 18" /></svg>`
       const parser = new DOMParser()
       const dom = parser.parseFromString(svg, 'image/svg+xml').documentElement
 
