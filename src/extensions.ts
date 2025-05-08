@@ -55,6 +55,7 @@ export const basicSetup: Extension = (() => [
     '.cm-lineNumbers': {
       backgroundColor: 'oklch(98.5% 0.002 247.839)',
       color: 'oklch(55.1% 0.027 264.364)',
+      userSelect: 'none',
     },
     '.cm-lineNumbers .cm-gutterElement': {
       padding: '0px',
