@@ -20,6 +20,29 @@ export const basicSetup: Extension = (() => [
   codeFolding(),
   history(),
 
+  // style
+  EditorView.theme({
+    '&': {
+      height: '100%',
+      backgroundColor: '#FFFFFF',
+    },
+    '&.cm-focused': {
+      outline: 'none',
+    },
+
+    // gutters
+    '.cm-gutters': {
+      backgroundColor: 'oklch(98.5% 0.002 247.839)',
+      border: 'none',
+    },
+    '.cm-fold-gutter': {
+      cursor: 'pointer',
+    },
+    '.cm-fold-gutter[data-open="false"]': {
+      transform: 'rotateZ(-90deg)',
+    },
+  }),
+
   // presentation features
   drawSelection(),
   EditorView.lineWrapping,
@@ -30,7 +53,15 @@ export const basicSetup: Extension = (() => [
   highlightSelectionMatches(),
 
   // gutters
-  foldGutter(),
+  foldGutter({
+    markerDOM(open) {
+      const svg = `<svg class="cm-fold-gutter" data-open="${open}" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M36 18L24 30L12 18" /></svg>`
+      const parser = new DOMParser()
+      const dom = parser.parseFromString(svg, 'image/svg+xml').documentElement
+
+      return dom
+    },
+  }),
   highlightActiveLineGutter(),
 
   // input handling
