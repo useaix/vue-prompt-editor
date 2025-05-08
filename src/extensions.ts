@@ -25,6 +25,8 @@ export const basicSetup: Extension = (() => [
     '&': {
       height: '100%',
       backgroundColor: '#FFFFFF',
+      fontSize: '16px',
+      lineHeight: 1.5,
     },
     '&.cm-focused': {
       outline: 'none',
