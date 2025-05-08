@@ -37,10 +37,15 @@ export const basicSetup: Extension = (() => [
     },
     '.cm-lineNumbers': {
       backgroundColor: 'oklch(98.5% 0.002 247.839)',
+      color: 'oklch(55.1% 0.027 264.364)',
     },
     '.cm-lineNumbers .cm-gutterElement': {
       padding: '0px',
       textAlign: 'center',
+      transition: 'color 0.3s ease',
+    },
+    '.cm-lineNumbers .cm-gutterElement.cm-activeLineGutter': {
+      color: 'oklch(62.3% 0.214 259.815)',
     },
     '.cm-foldGutter .cm-activeLineGutter': {
       backgroundColor: 'oklch(97% 0.014 254.604)',
