@@ -31,6 +31,11 @@ export const basicSetup: Extension = (() => [
     '&.cm-focused': {
       outline: 'none',
     },
+
+    '.cm-content': {
+      paddingBottom: '0px !important',
+    },
+
     '.cm-scroller::-webkit-scrollbar': {
       width: '6px',
       height: '6px',
